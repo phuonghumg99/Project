@@ -1,0 +1,170 @@
+<odoo>
+    <record id="th_view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">th_view_partner_form_inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority" eval="99"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='zip']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='street2']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+<!--            <xpath expr="//span[@name='address_name']//b" position="attributes">-->
+<!--                <attribute name="attrs">{}</attribute>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='city']" position="before">
+                <field name="th_ward_id" placeholder="Xã / Phường" class="o_address_ward" style="width:50%"
+                       options="{'no_create': True, 'no_open': True}"
+                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                <field name="th_district_id" placeholder="Quận / Huyện" class="o_address_district" style="width:50%"
+                       options="{'no_create': True, 'no_open': True}"
+                       attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='city']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state_id']" position="attributes">
+                <attribute name="style">width:100%</attribute>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="before">
+                <label for="th_place_of_birth_id"/>
+                <div class="o_row">
+                    <field name="th_place_of_birth_id" options='{"no_open": True}'/>
+                    <label for="th_birthday"/>
+                    <field name="th_birthday"/>
+                </div>
+                <field name="th_gender"/>
+                <field name="phone" position="move"/>
+                <!--                <label for="th_phone2" class="oe_inline"/>-->
+                <!--                <div class="o_row o_row_readonly">-->
+                <!--                    <button name="phone_action_blacklist_remove" class="fa fa-ban text-danger" title="This phone number is blacklisted for SMS Marketing. Click to unblacklist." type="object" context="{'default_phone': phone}" groups="base.group_user" attrs="{'invisible': [('phone_blacklisted', '=', False)]}"/>-->
+                <field name="th_phone2" widget="phone"/>
+                <!--                </div>-->
+                <field name="email" position="move"/>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="lang" position="move"/>
+                <field name="th_module_ids" widget="many2many_tags" required="1" options="{'no_create': True, 'no_open': True}"/>
+            </xpath>
+            <xpath expr="//label[@for='phone']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='mobile']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+<!--            <xpath expr="//field[@name='function']" position="before">-->
+<!--                <label for="th_ethnicity_id"/>-->
+<!--                <div class="o_row">-->
+<!--                    <field name="th_ethnicity_id" options='{"no_open": True}'/>-->
+<!--                    <label for="th_religion_id"/>-->
+<!--                    <field name="th_religion_id" options='{"no_open": True}'/>-->
+<!--                </div>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='function']" position="after">-->
+<!--                <field name="title" position="move"/>-->
+<!--                <field name="th_citizen_identification"/>-->
+<!--                <label for="th_date_identification"/>-->
+<!--                <div class="o_row">-->
+<!--                    <field name="th_date_identification"/>-->
+<!--                    <label for="th_place_identification"/>-->
+<!--                    <field name="th_place_identification"/>-->
+<!--                </div>-->
+<!--                <field name="th_citizen_identification_image" string="Ảnh CMT/ CCCD" widget="many2many_binary"/>-->
+<!--                <field name="th_customer_code" readonly="1"/>-->
+<!--                <field name="th_affiliate_code" readonly="1"/>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="website" position="move"/>
+            </xpath>
+            <xpath expr="//field[@name='function']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='title']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='website']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/group/group[1]" position="after">
+                <group>
+                    <span class="o_form_label o_td_label" name="address_name">
+                        <b attrs="{'invisible': [('is_company','=', True)]}">Địa chỉ thường trú</b>
+                        <b attrs="{'invisible': [('is_company','=', False)]}">Địa chỉ</b>
+                    </span>
+                    <div class="o_address_format">
+                        <field name="th_street" placeholder="Street..." class="o_address_street" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                        <field name="th_ward_permanent_id" placeholder="Xã / Phường" class="o_address_ward" style="width:50%" options="{'no_create': True, 'no_open': True}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                        <field name="th_district_permanent_id" placeholder="Quận / Huyện" class="o_address_district" style="width:50%" options="{'no_create': True, 'no_open': True}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                        <field name="th_state_id" class="o_address_state" style="width:100%" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                        <field name="th_country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                    </div>
+                    <label for="th_ethnicity_id"/>
+                    <div class="o_row">
+                        <field name="th_ethnicity_id" options='{"no_open": True}'/>
+                        <label for="th_religion_id"/>
+                        <field name="th_religion_id" options='{"no_open": True}'/>
+                    </div>
+                    <field name="title" position="move"/>
+                    <field name="function" position="move"/>
+                    <field name="th_citizen_identification"/>
+                    <label for="th_date_identification"/>
+                    <div class="o_row">
+                        <field name="th_date_identification"/>
+                        <label for="th_place_identification"/>
+                        <field name="th_place_identification"/>
+                    </div>
+                    <field name="th_customer_code" readonly="1"/>
+                    <field name="th_affiliate_code" readonly="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    
+
+<!--    <record id="th_res_partner_private_view_form" model="ir.ui.view">-->
+<!--        <field name="name">th.res.partner.private.view.form</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="inherit_id" ref="base.res_partner_view_form_private"/>-->
+<!--        <field name="arch" type="xml">-->
+
+<!--            <xpath expr="//form/sheet/group/group[1]" position="after">-->
+<!--                <group>-->
+<!--                    <span class="o_form_label o_td_label" name="address_name">-->
+<!--                        <b>Current Address</b>-->
+<!--                    </span>-->
+<!--                    <div class="o_address_format">-->
+<!--                        <field name="th_street" placeholder="Street..." class="o_address_street" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>-->
+<!--                        <field name="th_ward_permanent_id" placeholder="Xã / Phường" class="o_address_ward" style="width:50%" options="{'no_create': True, 'no_open': True}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>-->
+<!--                        <field name="th_district_permanent_id" placeholder="Quận / Huyện" class="o_address_district" style="width:50%" options="{'no_create': True, 'no_open': True}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>-->
+<!--                        <field name="th_state_id" class="o_address_state" style="width:100%" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>-->
+<!--                        <field name="th_country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>-->
+<!--                    </div>-->
+<!--                </group>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//label[@for='street']" position="attributes">-->
+<!--                <attribute name="string">Permanent Address</attribute>-->
+<!--            </xpath>-->
+
+<!--        </field>-->
+<!--    </record>-->
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="th_res_partner_view_form_inherit_mail" model="ir.ui.view">
+        <field name="name">th_res_partner_view_form_inherit_mail</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="mail.res_partner_view_form_inherit_mail"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//label[@for='email']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

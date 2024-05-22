@@ -1,0 +1,29 @@
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="th_prm_view_formio_builder_form" model="ir.ui.view">
+        <field name="name">th_prm_view_formio_builder_form</field>
+        <field name="model">formio.builder</field>
+        <field name="inherit_id" ref="formio.view_formio_builder_form"/>
+        <field name="priority">9999999</field>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Giá trị mặc đinh" name="th_field_default" attrs="{'invisible': [('th_storage_location', '!=', 'prm')]}">
+                    <field name="th_field_default_ids">
+                        <tree create="0" delete="0" editable="bottom">
+                            <field name="th_formio_builder_id" invisible="1"/>
+                            <field name="th_default_value" nolabel="1"/>
+                            <field name="th_flag" invisible="1"/>
+                            <field name="th_ownership_unit_id" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            <field name="th_partner_group_id" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            <field name="th_partner_source_id" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            <field name="th_caregiver_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                            <field name="th_status_category_id" domain="[('th_type', '=', parent.th_storage_location)]" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

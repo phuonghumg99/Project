@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="prm_level_p0" model="prm.level">
+            <field name="name">P0</field>
+            <field name="th_sequence">1</field>
+            <field name="th_type">prm</field>
+            <field name="th_first_status" eval="True"/>
+            <field name="th_last_status" eval="False"/>
+            <field name="th_description">Contact thô được tìm kiếm từ các nguồn</field>
+        </record>
+        <record id="prm_level_p1" model="prm.level">
+            <field name="name">P1</field>
+            <field name="th_sequence">2</field>
+            <field name="th_type">prm</field>
+            <field name="th_first_status" eval="False"/>
+            <field name="th_last_status" eval="False"/>
+            <field name="th_description">Đã được lọc trùng trên hệ thống PRM</field>
+        </record>
+        <record id="prm_level_p2" model="prm.level">
+            <field name="name">P2</field>
+            <field name="th_sequence">3</field>
+            <field name="th_type">prm</field>
+            <field name="th_first_status" eval="False"/>
+            <field name="th_last_status" eval="False"/>
+            <field name="th_description">Đối tác đúng đối tượng tìm kiếm</field>
+        </record>
+        <record id="prm_level_p3" model="prm.level">
+            <field name="name">P3</field>
+            <field name="th_sequence">4</field>
+            <field name="th_type">prm</field>
+            <field name="th_first_status" eval="False"/>
+            <field name="th_last_status" eval="False"/>
+            <field name="th_description">Đối tác quan tâm chương trình hợp tác và muốn hợp tác cùng AUM</field>
+        </record>
+        <record id="prm_level_p4" model="prm.level">
+            <field name="name">P4</field>
+            <field name="th_sequence">5</field>
+            <field name="th_type">prm</field>
+            <field name="th_first_status" eval="False"/>
+            <field name="th_last_status" eval="False"/>
+            <field name="th_description">Là đối tác đã hiểu đầy đủ về chương trình tuyển sinh và cơ chế hợp tác</field>
+        </record>
+        <record id="prm_level_p5" model="prm.level">
+            <field name="name">P5</field>
+            <field name="th_sequence">6</field>
+            <field name="th_type">prm</field>
+            <field name="th_first_status" eval="False"/>
+            <field name="th_last_status" eval="False"/>
+            <field name="th_description">Là đối tác đã ký kết hoặc thỏa thuận bằng miệng</field>
+        </record>
+        <record id="prm_level_p6" model="prm.level">
+            <field name="name">P6</field>
+            <field name="th_sequence">7</field>
+            <field name="th_type">prm</field>
+            <field name="th_first_status" eval="False"/>
+            <field name="th_last_status" eval="False"/>
+            <field name="th_description">Đã được training toàn bộ chương trình, cách thức triển khai: Vấn đề quy trình đăng ký, Lệ phí, học phí, Cách thu hồ sơ, Cấp tài khoản CRM (nếu có)</field>
+        </record>
+        <record id="prm_level_p7" model="prm.level">
+            <field name="name">P7</field>
+            <field name="th_sequence">8</field>
+            <field name="th_type">prm</field>
+            <field name="th_first_status" eval="False"/>
+            <field name="th_last_status" eval="True"/>
+            <field name="th_description">Đăng ký đối tác thành công</field>
+        </record>
+        <record id="pom_level_c0" model="prm.level">
+            <field name="name">C0</field>
+            <field name="th_sequence">9</field>
+            <field name="th_type">pom</field>
+            <field name="th_first_status" eval="True"/>
+            <field name="th_last_status" eval="False"/>
+            <field name="th_description">Nhận dữ liệu từ PRM</field>
+        </record>
+        <record id="pom_level_c1" model="prm.level">
+            <field name="name">C1</field>
+            <field name="th_sequence">10</field>
+            <field name="th_type">pom</field>
+            <field name="th_first_status" eval="False"/>
+            <field name="th_last_status" eval="False"/>
+            <field name="th_description">Đối tác bắt đầu cho ra sản phẩm (gửi học viên tư vấn)</field>
+        </record>
+        <record id="pom_level_c2" model="prm.level">
+            <field name="name">C2</field>
+            <field name="th_sequence">11</field>
+            <field name="th_type">pom</field>
+            <field name="th_first_status" eval="False"/>
+            <field name="th_last_status" eval="False"/>
+            <field name="th_description">Đối tác đã có contact được AUM nghiệm thu</field>
+        </record>
+        <record id="pom_level_c3" model="prm.level">
+            <field name="name">C3</field>
+            <field name="th_sequence">12</field>
+            <field name="th_type">pom</field>
+            <field name="th_first_status" eval="False"/>
+            <field name="th_last_status" eval="False"/>
+            <field name="th_description">Đại lý cấp 4</field>
+        </record>
+        <record id="pom_level_c4" model="prm.level">
+            <field name="name">C4</field>
+            <field name="th_sequence">13</field>
+            <field name="th_type">pom</field>
+            <field name="th_first_status" eval="False"/>
+            <field name="th_last_status" eval="False"/>
+            <field name="th_description">Đại lý cấp 3</field>
+        </record>
+        <record id="pom_level_c5" model="prm.level">
+            <field name="name">C5</field>
+            <field name="th_sequence">14</field>
+            <field name="th_type">pom</field>
+            <field name="th_first_status" eval="False"/>
+            <field name="th_last_status" eval="False"/>
+            <field name="th_description">Đại lý cấp 2</field>
+        </record>
+        <record id="pom_level_c6" model="prm.level">
+            <field name="name">C6</field>
+            <field name="th_sequence">15</field>
+            <field name="th_type">pom</field>
+            <field name="th_first_status" eval="False"/>
+            <field name="th_last_status" eval="True"/>
+            <field name="th_description">Đại lý cấp 1</field>
+        </record>
+    </data>
+</odoo>

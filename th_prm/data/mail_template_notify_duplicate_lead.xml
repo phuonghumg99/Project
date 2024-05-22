@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="th_prm_mail_template" model="mail.template">
+            <field name="name">Thông báo về cơ hội trùng</field>
+            <field name="model_id" ref="th_prm.model_prm_lead"/>
+            <field name="email_from">{{ ctx.get('email_from', '') }}</field>
+            <field name="email_to">{{ ctx.get('email_to', '') }}</field>
+            <field name="subject">Thông báo về cơ hội trùng</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p>Kính gửi,
+                        <t t-out="ctx.get('receiver_name')"/>
+                    </p>
+                    <p>Bạn có một cơ hội trùng, đối tác đã điền thông tin vào form và muốn được chăm sóc trở lại. Xử lý
+                        thông qua hệ thống ERP hoặc liên kết dưới:
+                    </p>
+                    <p>
+                        <t t-out="ctx.get('url')"/>
+                    </p>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

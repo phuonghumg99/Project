@@ -1,0 +1,13 @@
+<odoo>
+    <record id="th_ir_cron_sync_warehouse" model="ir.cron">
+        <field name="name">Đồng bộ xuất xứ</field>
+        <field name="model_id" ref="model_th_origin"/>
+        <field name="state">code</field>
+        <field name="code">model.search([]).update_th_warehouse([], state='write')</field>
+        <field name="nextcall" eval="DateTime.now().strftime('%Y-%m-%d 16:00:00')"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+</odoo>

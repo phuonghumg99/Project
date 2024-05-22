@@ -1,0 +1,51 @@
+<odoo>
+    <record id="th_trm_subject_view_form" model="ir.ui.view">
+        <field name="name">th_trm_subject_view_form</field>
+        <field name="model">th.trm.subject</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="th_trm_subject_code"/>
+                        <field name="th_trm_subject_code_aum"/>
+                        <field name="th_description"/>
+                    </group>
+                    <notebook>
+                        <page string="Ngành học" name="subject">
+                            <field name="th_subject_major_ids">
+                                <tree editable="bottom">
+                                    <field name="th_subject_major_code"/>
+                                    <field name="th_trm_major_id" required="1"
+                                           options='{"no_open": True, "no_create": True}'/>
+<!--                                    <field name="th_trm_subject_id" invisible="1"/>-->
+                                    <field name="th_major_group_ids" invisible="0" widget="many2many_tags"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="th_trm_subject_view_tree" model="ir.ui.view">
+        <field name="name">th_trm_subject_view_tree</field>
+        <field name="model">th.trm.subject</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="th_trm_subject_code"/>
+                <field name="th_trm_subject_code_aum"/>
+                <field name="name"/>
+                <field name="th_subject_major_ids" widget="many2many_tags"/>
+                <field name="th_description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="th_trm_subject_view_act" model="ir.actions.act_window">
+        <field name="name">Môn học</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">th.trm.subject</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

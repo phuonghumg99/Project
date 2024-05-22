@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="prm_lead_reuse_view_tree" model="ir.ui.view">
+        <field name="name">prm.lead.reuse.tree</field>
+        <field name="model">prm.lead</field>
+        <field name="inherit_id" ref="prm_lead_view_tree"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="js_class">prm_lead_list_reuse</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_prm_lead_reuse_view" model="ir.actions.act_window">
+        <field name="name">Kho PRM</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">prm.lead</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('th_storage', '=', True), ('th_ownership_unit_id', '=', active_id)]</field>
+        <field name="context">{'create': False}</field>
+        <field name="view_id" ref="prm_lead_reuse_view_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chưa có dữ liệu
+            </p>
+        </field>
+    </record>
+</odoo>

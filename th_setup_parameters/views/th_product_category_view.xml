@@ -1,0 +1,45 @@
+<odoo>
+    <record id="th_product_category_tree_view" model="ir.ui.view">
+        <field name="name">th_product_category_tree_view</field>
+        <field name="model">product.category</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="display_name"/>
+                <field name="th_module_ids" widget="many2many_tags"/>
+                <field name="th_origin_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="th_product_category_form_view" model="ir.ui.view">
+        <field name="name">th_product_category_form_view</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="th_module_ids" widget="many2many_tags" required="1" options="{'no_create': True, 'no_open': True}"/>
+                <field name="th_origin_ids" widget="many2many_tags" required="1" options="{'no_create': True, 'no_open': True}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="th_product_category_act_view" model="ir.actions.act_window">
+        <field name="name">Nhóm sản phẩm</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.category</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('th_setup_parameters.th_product_category_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': False})]"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+</odoo>

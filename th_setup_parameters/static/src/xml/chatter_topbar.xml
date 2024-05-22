@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="th_setup_parameters.ChatterTopbar" t-inherit="mail.ChatterTopbar" t-inherit-mode="extension" owl="1">
+        <xpath expr="//button[hasclass('o_ChatterTopbar_buttonSendMessage')]" position="replace">
+            <t t-if="env.searchModel.resModel == 'crm.lead' or env.searchModel.resModel == 'ccs.lead'
+             or env.searchModel.resModel == 'prm.lead' or env.searchModel.resModel == 'pom.lead'">
+                <button class="o_ChatterTopbar_button o_ChatterTopbar_buttonSendMessage btn text-nowrap me-2"
+                    type="button"
+                    t-att-class="{
+                        'o-active btn-odoo': chatterTopbar.chatter.composerView and !chatterTopbar.chatter.composerView.composer.isLog,
+                        'btn-odoo': !chatterTopbar.chatter.composerView,
+                        'btn-light': chatterTopbar.chatter.composerView and chatterTopbar.chatter.composerView.composer.isLog,
+                    }"
+                    t-att-disabled="!chatterTopbar.chatter.canPostMessage"
+                    data-hotkey="m"
+                    t-on-click="chatterTopbar.chatter.onClickSendMessage"
+                >
+                    Gửi thư
+                </button>
+            </t>
+            <t t-else="">
+                <button class="o_ChatterTopbar_button o_ChatterTopbar_buttonSendMessage btn text-nowrap me-2"
+                    type="button"
+                    t-att-class="{
+                        'o-active btn-odoo': chatterTopbar.chatter.composerView and !chatterTopbar.chatter.composerView.composer.isLog,
+                        'btn-odoo': !chatterTopbar.chatter.composerView,
+                        'btn-light': chatterTopbar.chatter.composerView and chatterTopbar.chatter.composerView.composer.isLog,
+                    }"
+                    t-att-disabled="!chatterTopbar.chatter.canPostMessage"
+                    data-hotkey="m"
+                    t-on-click="chatterTopbar.chatter.onClickSendMessage"
+                >
+                    Gửi tin
+                </button>
+            </t>
+        </xpath>
+        <xpath expr="//button[hasclass('o_ChatterTopbar_buttonScheduleActivity')]" position="replace">
+            <t t-if="env.searchModel.resModel == 'crm.lead' or env.searchModel.resModel == 'ccs.lead'
+             or env.searchModel.resModel == 'prm.lead' or env.searchModel.resModel == 'pom.lead'">
+                <button class="o_ChatterTopbar_button o_ChatterTo   pbar_buttonScheduleActivity btn btn-light text-nowrap" type="button" t-att-disabled="!chatterTopbar.chatter.isTemporary and !chatterTopbar.chatter.hasWriteAccess" t-on-click="chatterTopbar.chatter.onClickScheduleActivity" data-hotkey="shift+a">
+                    <i class="fa fa-clock-o me-1"/>
+                    <span>Lịch làm việc</span>
+                </button>
+            </t>
+            <t t-else="">
+                <button class="o_ChatterTopbar_button o_ChatterTopbar_buttonScheduleActivity btn btn-light text-nowrap" type="button" t-att-disabled="!chatterTopbar.chatter.isTemporary and !chatterTopbar.chatter.hasWriteAccess" t-on-click="chatterTopbar.chatter.onClickScheduleActivity" data-hotkey="shift+a">
+                    <i class="fa fa-clock-o me-1"/>
+                    <span>Các hoạt động</span>
+                </button>
+            </t>
+        </xpath>
+    </t>
+
+</templates>

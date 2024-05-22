@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="prm_lead_reuse_view_form" model="ir.ui.view">
+        <field name="name">prm_lead_reuse_view_form</field>
+        <field name="model">prm.lead.reuse</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Tên nguồn tái sử dụng"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="th_allowed_team_ids" invisible="1"/>
+                        <field name="th_allowed_user_ids" invisible="1"/>
+                        <field name="th_team_user"/>
+                        <field name="th_team_id"
+                               attrs="{'required': [('th_team_user','=','team')], 'invisible': [('th_team_user', '!=', 'team')]}"
+                               options="{'no_create': True, 'no_open': True}"/>
+                        <field name="th_user_id"
+                               attrs="{'required': [('th_team_user','=','individual')], 'invisible': [('th_team_user', '!=', 'individual')]}"/>
+                    </group>
+                    <footer>
+                        <button name="open_lead" type="object" string="Xác nhận" class="btn-primary" data-hotkey="q"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,174 @@
+<odoo>
+    <record id="th_partner_profile_view_tree" model="ir.ui.view">
+        <field name="name">th_partner_profile_view_tree</field>
+        <field name="model">th.partner.profile</field>
+        <field name="arch" type="xml">
+            <tree string="" editable="bottom">
+                <field name="name"/>
+                <field name="th_ownership_unit_id" options='{"no_open": True, "no_create": True}' readonly="1"/>
+                <field name="th_customer_code"/>
+                <field name="th_partner_id" options='{"no_open": True, "no_create_edit": True}' required="1"
+                       readonly="1"/>
+                <field name="th_prm_phone"/>
+                <field name="th_prm_email"/>
+                <field name="th_affiliate_code"/>
+                <field name="th_description"/>
+                <button name="action_open_form" type="object" string="Mở Form" icon="fa-external-link"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="th_partner_profile_view_form" model="ir.ui.view">
+        <field name="name">th_partner_profile_view_form</field>
+        <field name="model">th.partner.profile</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_lead_prm" type="object" class="oe_stat_button"
+                                invisible="context.get('invisible_button')"
+                                icon="fa-graduation-cap">
+                            <div class="o_stat_info">
+                                <field name="th_quantity_prm" readonly="1" class="o_stat_value"/>
+                                <span class="">
+                                    Cơ hội PRM
+                                </span>
+                            </div>
+                        </button>
+                        <button name="action_open_lead_pom" type="object" class="oe_stat_button"
+                                invisible="context.get('invisible_button')"
+                                icon="fa-graduation-cap">
+                            <div class="o_stat_info">
+                                <field name="th_quantity_pom" readonly="1" class="o_stat_value"/>
+                                <span class="">
+                                    Cơ hội POM
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="oe_title">
+                        <h1>
+                            <field class="text-break" name="name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <notebook>
+                        <page string="Sơ yếu lý lịch">
+                            <group>
+                                <group name="info_partner" string="Thông tin cá nhân">
+                                    <field name="th_customer_code"/>
+                                    <field name="th_partner_id" options='{"no_open": True, "no_create_edit": True}'
+                                           readonly="1"
+                                           required="1"/>
+                                    <field name="th_prm_email"/>
+                                    <field name="th_prm_phone"/>
+                                    <field name="th_prm_phone2"/>
+                                    <field name="th_ownership_unit_id" options='{"no_open": True, "no_create": True}'
+                                           readonly="1"/>
+                                    <field name="th_affiliate_code"/>
+                                </group>
+                                <group string="">
+                                    <field name="th_gender"/>
+                                    <label for="th_ethnicity_id"/>
+                                    <div class="o_row">
+                                        <field name="th_ethnicity_id" options='{"no_open": True, "no_create": True}'/>
+                                        <label for="th_religion_id"/>
+                                        <field name="th_religion_id" options='{"no_open": True, "no_create": True}'/>
+                                    </div>
+                                    <label for="th_place_of_birth_id"/>
+                                    <div class="o_row">
+                                        <field name="th_place_of_birth_id"
+                                               options='{"no_open": True, "no_create": True}'/>
+                                        <label for="th_birthday"/>
+                                        <field name="th_birthday"/>
+                                    </div>
+                                    <label for="th_district_id" string="Địa chỉ"/>
+                                    <div class="o_address_format">
+                                        <field name="th_street" id="street_page_lead" placeholder="Đường phố..."
+                                               class="o_address_street"/>
+                                        <field name="th_ward_id" placeholder="Xã / Phường" class="o_address_ward"
+                                               style="width:50%" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="th_district_id" placeholder="Quận / Huyện"
+                                               class="o_address_district"
+                                               style="width:50%" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="th_state_id" class="o_address_state" style="width:100%"
+                                               placeholder="Tỉnh/ Thành phố"
+                                               options='{"no_open": True, "no_create": True}'/>
+                                        <field name="th_country_id" placeholder="Quốc gia" class="o_address_country"
+                                               options='{"no_open": True, "no_create": True}'/>
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Thông tin thanh toán">
+                            <group>
+                                <group string="Tài khoản">
+                                    <field name="th_bank"/>
+                                    <field name="th_account_name"/>
+                                    <field name="th_account_number"/>
+                                    <field name="th_account_branch"/>
+                                </group>
+                                <group string="">
+                                    <field name="th_citizen_identification"/>
+                                    <field name="th_date_identification"/>
+                                    <field name="th_place_identification"/>
+                                    <field name="th_tax_no"/>
+                                    <field name="th_citizen_identification_image_filename" invisible="1"/>
+                                    <field name="th_citizen_identification_image"
+                                           filename="th_citizen_identification_image_filename"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Hợp đồng">
+                            <group>
+                                <group string="Thông tin hợp đồng">
+                                    <field name="th_commission_policy" options='{"no_open": True, "no_create": True}'/>
+                                    <field name="th_contract_number"/>
+                                    <field name="th_contract_sign_date"/>
+                                    <field name="th_contract_file" widget="many2many_binary"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="th_partner_profile_filter" model="ir.ui.view">
+        <field name="name">th_partner_profile_filter</field>
+        <field name="model">th.partner.profile</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="name"/>
+                <field name="th_partner_id" filter_domain="[('th_partner_id.name', 'ilike', self)]"/>
+                <field name="th_prm_phone"
+                       filter_domain="[('th_partner_id.phone', 'ilike', self)]"/>
+                <field name="th_prm_email" filter_domain="[('th_partner_id.email', 'ilike', self)]"/>
+                <field name="th_customer_code"/>
+                <field name="th_affiliate_code"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="th_partner_profile_view_act" model="ir.actions.act_window">
+        <field name="name">Hồ sơ</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">th.partner.profile</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'create': True, 'default_th_ownership_unit_id': active_id}</field>
+        <field name="domain">[('th_ownership_unit_id', '=',active_id)]
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chưa có dữ liệu
+            </p>
+        </field>
+    </record>
+</odoo>

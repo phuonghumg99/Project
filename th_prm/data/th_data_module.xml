@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'th_setup_parameters'),('name', '=', 'th_prm_module')]"/>
+        </function>
+        <value eval="{'noupdate': False}"/>
+    </function>
+        <record id="th_setup_parameters.th_prm_module" model="therp.module">
+            <field name="active">True</field>
+        </record>
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'th_setup_parameters'),('name', '=', 'th_prm_module')]"/>
+        </function>
+        <value eval="{'noupdate': True}"/>
+    </function>
+</odoo>

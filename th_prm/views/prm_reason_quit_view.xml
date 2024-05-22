@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="prm_reason_quit_view_form" model="ir.ui.view">
+        <field name="name">prm.reason.quit.form</field>
+        <field name="model">prm.reason.quit</field>
+        <field name="arch" type="xml">
+            <form string="Lý do ngừng hợp tác">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field class="text-break" name="name" id="name" placeholder="Tên lý do..."/>
+                        </h1>
+                    </div>
+                    <separator/>
+                    <notebook>
+                        <page string="Chi tiết">
+                            <field name="th_reason_quit_detail_ids" id="reason_quit_detail">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="th_description"/>
+                                    <field name="th_reason_quit_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="prm_reason_quit_view_tree" model="ir.ui.view">
+        <field name="name">prm.reason.quit.tree</field>
+        <field name="model">prm.reason.quit</field>
+        <field name="arch" type="xml">
+            <tree string="Lý do ngừng hợp tác">
+                <field name="name"/>
+                <field name="th_reason_quit_detail_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_prm_reason_quit_view" model="ir.actions.act_window">
+        <field name="name">Lý do Ngừng hợp tác</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">prm.reason.quit</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

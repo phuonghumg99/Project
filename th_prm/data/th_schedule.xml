@@ -1,0 +1,16 @@
+<odoo>
+    <record id="th_prm_action_synchronize_data_api" model="ir.cron">
+        <field name="name">PRM-Đồng bộ dữ liệu về affiliate</field>
+        <field name="interval_number">1</field>
+        <field name="nextcall" eval="datetime.now().strftime('%Y-%m-%d 16:00:00')"/>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active">1</field>
+        <field name="doall">0</field>
+        <field name="model_id" ref="model_prm_lead"/>
+        <field name="state">code</field>
+        <field name="code">
+            model.with_context(dict(th_schedule=True)).sudo().search([]).th_schedule_action_synchronize_data_api()
+        </field>
+    </record>
+</odoo>

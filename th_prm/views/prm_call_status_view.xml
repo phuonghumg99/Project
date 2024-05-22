@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="prm_call_status_view" model="ir.ui.view">
+        <field name="name">prm.call.status.form</field>
+        <field name="model">th.status.category</field>
+        <field name="arch" type="xml">
+            <form string="Tình trạng gọi">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="th_prm_level_category" widget="many2many_tags" string="Mối quan hệ"/>
+                        <field name="th_description"/>
+                    </group>
+                    <notebook>
+                        <page string="Trang thái chi tiết">
+                            <field name="th_status_detail_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="th_description"/>
+                                    <field name="th_prm_level" widget="many2many_tags" domain="[('id' , 'in', parent.th_prm_level_category)]" required="1" string="Mối quan hệ"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_prm_call_status_view" model="ir.actions.act_window">
+        <field name="name">Tình trạng gọi</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">th.status.category</field>
+        <field name="context">{'default_th_type': 'prm'}</field>
+        <field name="domain">[('th_type', '=', 'prm')]</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('th_setup_parameters.th_call_status_category_view_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('prm_call_status_view')})]"/>
+    </record>
+</odoo>

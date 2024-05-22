@@ -1,0 +1,184 @@
+<odoo>
+    <record id="th_trm_lead_view_form" model="ir.ui.view">
+        <field name="name">th_trm_lead_view_form</field>
+        <field name="model">th.trm.lead</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <field name="th_last_status_stage" invisible="1"/>
+                <header>
+                    <field name="stage_id" widget="th_statusbar" class="o_field_statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_profile" type="object" class="oe_stat_button"
+                                icon="fa-address-card"
+                                attrs="{'invisible': [('th_partner_id', '=', False)]}">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Hồ Sơ
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field class="text-break" name="name" placeholder="Tên cơ hội" readonly="1"/>
+                        </h1>
+
+                        <h4 class="d-flex gap-2 g-0 align-items-end pb-3">
+                            <div style="width: 15%; min-width: 4rem;">
+                                <label for="th_customer_code" class="oe_edit_only pb-1"/>
+                                <div class="d-flex align-items-end">
+                                    <field name="th_customer_code" readonly="1"/>
+                                </div>
+                            </div>
+                            <div style="width: 15%; min-width: 4rem;">
+                                <label for="th_last_check" class="oe_edit_only pb-1"/>
+                                <div class="d-flex align-items-end">
+                                    <field name="th_last_check" widget="remaining_days" readonly="1"/>
+                                </div>
+                            </div>
+                        </h4>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="th_partner_id" string="Tên giảng viên *" context="{'trm': True}" readonly="context.get('readonly_th_partner_id')"
+                                   options='{"no_create": True, "no_open": True, "no_quick_create": True}' required="1" attrs="{'readonly': [('id', '!=', False)]}"/>
+                            <field name="th_trm_email" readonly="1"/>
+                            <field name="th_trm_phone" readonly="1"/>
+                            <field name="th_trm_phone2" readonly="1"/>
+                            <field name="th_partner_reference_id" options="{'no_create': True, 'no_open': True}" attrs="{'readonly': [('th_check_partner_referred', '=', True)]}"/>
+                            <field name="th_check_partner_referred" invisible="1"/>
+                            <field name="th_affiliate_code"/>
+                            <field name="th_level_up_date" readonly="1"/>
+                            <field name="th_team_leader_ids" widget="many2many_tags" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="th_user_id" widget="many2one_avatar_user" readonly="1"/>
+                            <field name="th_trm_source" widget="many2many_tags"
+                                   options="{'no_create': True, 'no_open': True, 'color_field': 'th_color'}"/>
+                            <field name="th_trm_channel" widget="many2many_tags"
+                                   options="{'no_create': True, 'no_open': True, 'color_field': 'th_color'}"/>
+                            <field name="th_categ_id" string="Danh mục sản phẩm *" options="{'no_create': True, 'no_open': True}" required="1"/>
+                            <field name="th_product" options="{'no_create': True, 'no_open': True}" attrs="{'invisible': [('th_categ_id', '=', False)]}" required="1" domain="th_domain_product"/>
+                            <field name="th_domain_product" invisible="1"/>
+                            <field name="th_call_status" string="Tình trạng gọi *"
+                                   options="{'no_create': True, 'no_open': True}" required="True"/>
+                            <field name="th_status_detail_id" string="Trạng thái chi tiết *"
+                                   attrs="{'invisible': [('th_call_status', '=', False)]}"
+                                   options='{"no_open": True, "no_create": True}'
+                                   required="True"/>
+                            <field name="th_trm_team_id" invisible="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Mô tả">
+                            <field name="th_description" placeholder="Thêm mô tả..."/>
+                        </page>
+                        <page name="" string="Data getfly">
+                            <group>
+                                <field name="th_data_getfly" readonly="1"></field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="th_trm_lead_view_tree" model="ir.ui.view">
+        <field name="name">th_trm_lead_view_tree</field>
+        <field name="model">th.trm.lead</field>
+        <field name="arch" type="xml">
+            <tree string="" multi_edit="1">
+                <field name="th_categ_id" options="{'no_create': True, 'no_open': True}"
+                       required="1" optional="show"/>
+                <field name="th_product" options="{'no_create': True, 'no_open': True}" optional="show"
+                       required="1"/>
+                <field name="th_customer_code" optional="show" widget="tree_url"/>
+                <field name="th_trm_team_id" invisible="1" optional="show"/>
+                <field name="th_partner_id" attrs="{'readonly': [('id', '!=', False)]}"
+                       options='{"no_open": True, "no_quick_create": True}' optional="show" required="1"/>
+                <field name="th_trm_phone" string="Điện thoại" optional="show" readonly="1"/>
+                <field name="th_trm_email" optional="show" readonly="1"/>
+                <field name="th_user_id" options='{"no_open": True, "no_create": True}' readonly="1" optional="show"/>
+                <field name="stage_id" options='{"no_open": True, "no_create": True}' optional="show"/>
+                <field name="th_call_status" string="Tình trạng gọi *" options="{'no_create': True, 'no_open': True}"
+                       required="True" optional="show"/>
+                <field name="th_status_detail_id" attrs="{'invisible': [('th_call_status', '=', False)]}"
+                       options='{"no_open": True, "no_create": True}' optional="show"/>
+                <field name="th_last_check" readonly="1" widget="remaining_days" optional="show"/>
+                <field name="th_trm_source" widget="many2many_tags"
+                       options="{'no_create': True, 'no_open': True, 'color_field': 'th_color'}" optional="show"/>
+                <field name="th_trm_channel" widget="many2many_tags"
+                       options="{'no_create': True, 'no_open': True, 'color_field': 'th_color'}" optional="show"/>
+                <field name="th_level_up_date" optional="show" readonly="1"/>
+                <field name="th_partner_reference_id" options="{'no_create': True, 'no_open': True}"
+                       optional="show"/>
+                <field name="th_affiliate_code" readonly="1" optional="show"/>
+                <field name="th_description" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="th_trm_lead_filter" model="ir.ui.view">
+        <field name="name">th_trm_lead_filter</field>
+        <field name="model">th.trm.lead</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="name"/>
+                <field name="name_id_sequence" string="Mã cơ hội"/>
+                <field name="th_customer_code"/>
+                <field name="th_affiliate_code"/>
+                <field name="th_partner_reference_id"/>
+                <field name="th_partner_id" filter_domain="[('th_partner_id.name', 'ilike', self)]"/>
+                <field name="th_trm_phone"/>
+                <field name="th_trm_phone2"/>
+                <field name="th_trm_email"/>
+                <field name="th_call_status"/>
+                <field name="th_trm_source"/>
+<!--                <field name="th_trm_group"/>-->
+                <field name="th_trm_channel"/>
+                <field name="th_level_up_date"/>
+                <filter name="user_id" string="Chưa có người phụ trách" domain="[('th_user_id', '=', False)]"/>
+                <filter name="lead_today" string="Cơ hội hôm nay"
+                        domain="[('create_date', '&gt;', (context_today() - datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By" colspan="16">
+                    <filter name="last_check" string="Liên hệ lần cuối" context="{'group_by':'th_last_check:day'}"/>
+                </group>
+                <searchpanel>
+                    <field name="th_user_id" icon="fa-user-circle" enable_counters="1"/>
+                    <field name="stage_id" icon="fa-user-plus" enable_counters="1"/>
+                    <field name="th_categ_id" icon="fa fa-cube" enable_counters="1"/>
+                    <field name="th_product" icon="fa fa-cubes" enable_counters="1"/>
+                    <field name="th_call_status" icon="fa-phone" enable_counters="1"/>
+                    <field name="th_status_detail_id" icon="fa-phone" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="th_trm_lead_view_act" model="ir.actions.act_window">
+        <field name="name">Cơ hội sản xuất</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">th.trm.lead</field>
+        <field name="view_mode">tree,form</field>
+<!--        <field name="domain"></field>-->
+        <field name="search_view_id" ref="th_trm_lead_filter"/>
+        <field name="context">{
+            'is_new': True,
+            }
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chưa có dữ liệu
+            </p>
+        </field>
+    </record>
+</odoo>

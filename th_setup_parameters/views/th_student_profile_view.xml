@@ -1,0 +1,189 @@
+<odoo>
+    <record id="th_student_profile_view_tree" model="ir.ui.view">
+        <field name="name">th_student_profile_view_tree</field>
+        <field name="model">th.student.profile</field>
+        <field name="arch" type="xml">
+            <tree string="" create="0">
+                <field name="name"/>
+                <field name="th_date_of_receipt"/>
+                <field name="th_profile_status"/>
+                <field name="th_reason"/>
+                <field name="th_date_of_delivery"/>
+                <field name="th_handover_status"/>
+                <field name="th_decision_name" optional="hide"/>
+                <field name="th_decision_date" optional="hide"/>
+                <field name="th_student_code" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="th_student_profile_view_form" model="ir.ui.view">
+        <field name="name">th_student_profile_view_form</field>
+        <field name="model">th.student.profile</field>
+        <field name="arch" type="xml">
+            <form string="" create="0">
+                <heared>
+                </heared>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button o_res_partner_tip_opp" type="object"
+                                name="action_view_crm_lead"
+                                icon="fa-star">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Cơ hội</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                      <h1><field class="text-break" name="name" placeholder="Hồ sơ ..."/></h1>
+                    </div>
+                    <group name="state_profile">
+                        <group name="state_profile1" string="Trạng thái hồ sơ">
+                            <field name="th_date_of_receipt"/>
+                            <field name="th_profile_status"/>
+                        </group>
+                        <group string="">
+                            <field name="th_date_of_delivery" attrs="{'readonly': [('th_check_date_of_delivery', '=', True)]}" readonly="1"/>
+                            <field name="th_check_date_of_delivery" invisible="1"/>
+                            <field name="th_handover_status" readonly="1"/>
+                        </group>
+                    </group>
+                    <group name="admission_decision"  attrs="{'invisible': [('th_decision_name', '=', False)]}">
+                        <group name="admission_decision_name" string="Quyết định trúng tuyển">
+                            <field name="th_decision_name" readonly="1"/>
+                            <field name="th_decision_date" readonly="1"/>
+                        </group>
+                        <group name="th_student" string="">
+                            <field name="th_student_code" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group name="info_partner" string="Thông tin cá nhân">
+                            <field name="th_partner_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="th_first_and_last_name" invisible="1"/>
+                            <field name="th_gender"/>
+                            <label for="th_district_id" string="Địa chỉ"/>
+                            <div class="o_address_format">
+                                <field name="th_street" id="street_page_lead" placeholder="Street..." class="o_address_street"/>
+                                <field name="th_ward_id" placeholder="Xã / Phường" class="o_address_ward" style="width:50%" options='{"no_open": True, "no_create": True}'/>
+                                <field name="th_district_id" placeholder="Quận / Huyện" class="o_address_district" style="width:50%" options='{"no_open": True, "no_create": True}'/>
+                                <field name="th_state_id" class="o_address_state" style="width:100%" placeholder="State" options='{"no_open": True, "no_create": True}'/>
+                                <field name="th_country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                            </div>
+                        </group>
+                        <group string="">
+                            <label for="th_place_of_birth_id"/>
+                            <div class="o_row">
+                                <field name="th_place_of_birth_id" options='{"no_open": True, "no_create": True}'/>
+                                <label for="th_birthday"/>
+                                <field name="th_birthday"/>
+                            </div>
+                            <label for="th_ethnicity_id"/>
+                            <div class="o_row">
+                                <field name="th_ethnicity_id" options='{"no_open": True, "no_create": True}'/>
+                                <label for="th_religion_id"/>
+                                <field name="th_religion_id" options='{"no_open": True, "no_create": True}'/>
+                            </div>
+                            <label for="th_citizen_identification"/>
+                            <div class="o_row">
+                                <field name="th_citizen_identification"/>
+                                <label for="th_date_iden" string="Ngày cấp"/>
+                                <field name="th_date_iden"/>
+                            </div>
+                            <label for="th_ward_permanent_id" string="Hộ khẩu thường trú"/>
+                            <div class="o_address_format">
+                                <field name="th_street_permanent" id="street_page_lead" placeholder="Street..." class="o_address_street"/>
+                                <field name="th_ward_permanent_id" placeholder="Xã / Phường" class="o_address_ward" style="width:50%" options='{"no_open": True, "no_create": True}'/>
+                                <field name="th_district_permanent_id" placeholder="Quận / Huyện" class="o_address_district" style="width:50%" options='{"no_open": True, "no_create": True}'/>
+                                <field name="th_state_permanent_id" class="o_address_state" style="width:100%" placeholder="State" options='{"no_open": True, "no_create": True}'/>
+                                <field name="th_country_permanent_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                            </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="info_profile" string="Thông tin hồ sơ">
+                            <group>
+                                <group string="Hồ sơ">
+                                    <field name="th_cover_profile"/>
+                                    <field name="th_profile_image"/>
+                                    <field name="th_profile_degree"/>
+                                    <field name="th_profile_graduate"/>
+                                    <field name="th_profile_transcript"/>
+                                    <field name="th_school_profile"/>
+                                </group>
+                                <group string="">
+                                    <field name="th_pdk"/>
+                                    <field name="th_test_paper"/>
+                                    <field name="th_curriculum_vitae"/>
+                                    <field name="th_score_transfer"/>
+                                    <field name="th_other"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Thông tin điểm số" name="score_info">
+                            <group>
+                                <group string="Thông tin điểm cấp 3">
+                                    <field name="th_high_school"/>
+                                    <field name="th_combination_sub_id" options='{"no_open": True, "no_create": True}'/>
+                                    <field name="th_subject_score_1"/>
+                                    <field name="th_subject_score_2"/>
+                                    <field name="th_subject_score_3"/>
+                                </group>
+                                <group string="">
+                                    <field name="th_medium_score_in4"/>
+                                    <field name="th_medium_score_in10"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="family_relationship" string="Quan hệ gia đình">
+                            <group>
+                                <group name="info_father" string="Thông tin cha">
+                                    <field name="th_father_name"/>
+                                    <field name="th_father_birther"/>
+                                    <field name="th_father_job"/>
+                                </group>
+                                <group name="info_mother" string="Thông tin mẹ">
+                                    <field name="th_mother_name"/>
+                                    <field name="th_mother_birther"/>
+                                    <field name="th_mother_job"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="other_info" string="Thông tin khác">
+                            <group>
+                                <group string="Thông tin khác">
+                                    <field name="th_graduation_rank"/>
+                                    <field name="th_unit_for_work"/>
+                                    <field name="th_awarding_diplomas"/>
+                                    <field name="th_major_studied"/>
+                                    <field name="th_origin_id" invisible="1"/>
+                                    <field name="th_job"/>
+                                </group>
+                                <group string="">
+                                    <field name="th_graduation_year"/>
+                                    <field name="th_form_of_train"/>
+                                    <field name="th_certificate_number"/>
+                                    <field name="th_reference_number"/>
+                                    <field name="th_job"/>
+                                    <field name="th_reusable_source_name"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="th_student_profile_view_act" model="ir.actions.act_window">
+        <field name="name">Hồ sơ</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">th.student.profile</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

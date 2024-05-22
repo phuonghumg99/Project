@@ -1,0 +1,30 @@
+<odoo>
+    <menuitem id="th_setup_parameters_root" name="Cài đặt thông số" sequence="300" web_icon="th_setup_parameters,static/description/icon.png" groups="base.group_system">
+        <menuitem id="th_ownership_menu" name="Đơn vị sở hữu" action="th_ownership_view_act" sequence="1"/>
+        <menuitem id="th_university_major_root" name="Xuất xứ và ngành học" sequence="3">
+            <menuitem id="th_university_menu" name="Xuất xứ" action="th_university_view_act" sequence="1"/>
+            <menuitem id="th_major_menu" name="Ngành học" action="th_major_view_act" sequence="2"/>
+        </menuitem>
+        <menuitem id="th_info_channel_menu" name="Kênh" action="th_info_channel_view_act" sequence="5"/>
+        <menuitem id="th_region_and_station_menu_root" name="Vùng và Trạm"  sequence="7">
+            <menuitem id="th_admissions_region_view_menu" name="Vùng tuyển sinh" action="th_admissions_region_view_act" sequence="7"/>
+            <menuitem id="th_admissions_station_view_menu" name="Trạm tuyển sinh" action="th_admissions_station_view_act" sequence="7"/>
+        </menuitem>
+        <menuitem id="th_source_group_view_menu" name="Nhóm nguồn" action="th_source_group_view_act" sequence="9"/>
+        <menuitem id="th_status_root" name="Trạng thái" sequence="11" groups="base.group_no_one">
+            <menuitem id="th_call_status_category_menu" name="Nhóm trạng thái" action="th_call_status_category_view_act" sequence="3"/>
+            <menuitem id="th_status_detail_menu" name="Trạng thái chi tiết" action="th_status_detail_view_act" sequence="4"/>
+        </menuitem>
+        <menuitem id="th_graduation_system_view_menu" name="Hệ tốt nghiệp" action="th_graduation_system_view_act" sequence="13"/>
+        <menuitem id="th_combination_subjects_view_menu" name="Tổ hợp môn" action="th_combination_subjects_view_act" sequence="9"/>
+        <menuitem id="th_module_view_menu" name="Phân hệ" action="th_module_view_act" sequence="18"/>
+        <menuitem id="th_product_category_view_menu" name="Nhóm sản phẩm" action="th_product_category_act_view" sequence="18"/>
+        <menuitem id="invisible_log_view_menu" name="Ẩn log" action="th_invisible_log_view_act" sequence="99" groups="base.group_no_one"/>
+    </menuitem>
+
+<!--    menu contact-->
+    <menuitem id="th_country_district_view_menu" name="Quận / Huyện" parent="contacts.menu_localisation" action="th_country_district_view_act" sequence="90"/>
+    <menuitem id="th_country_ward_view_menu" name="Phường / Xã" parent="contacts.menu_localisation" action="th_country_ward_view_act" sequence="100"/>
+    <menuitem id="th_ethnicity_view_menu" name="Dân tộc" parent="contacts.res_partner_menu_config" action="th_ethnicity_view_act" sequence="90"/>
+    <menuitem id="th_religion_view_menu" name="Tôn giáo" parent="contacts.res_partner_menu_config" action="th_religion_view_act" sequence="99"/>
+</odoo>

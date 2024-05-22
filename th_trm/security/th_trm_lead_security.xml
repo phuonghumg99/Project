@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="module_category_trm_management" model="ir.module.category">
+            <field name="name">Quản lý quan hệ giảng viên</field>
+            <field name="description">Quản lý quan hệ giảng viên</field>
+            <field name="sequence">21</field>
+        </record>
+        <record id="module_category_trm" model="ir.module.category">
+            <field name="parent_id" ref="module_category_trm_management"/>
+            <field name="name">TRM</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="group_trm_user" model="res.groups">
+            <field name="name">Nhân viên</field>
+            <field name="category_id" ref="module_category_trm"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="group_trm_manager" model="res.groups">
+            <field name="name">Trưởng nhóm</field>
+            <field name="category_id" ref="module_category_trm"/>
+            <field name="implied_ids" eval="[(4, ref('group_trm_user'))]"/>
+        </record>
+        <record id="group_trm_supervisor" model="res.groups">
+            <field name="name">Trưởng phòng</field>
+            <field name="category_id" ref="module_category_trm"/>
+            <field name="implied_ids" eval="[(4, ref('group_trm_manager'))]"/>
+        </record>
+        <record id="group_trm_admin" model="res.groups">
+            <field name="name">Quản trị viên</field>
+            <field name="category_id" ref="module_category_trm"/>
+            <field name="implied_ids" eval="[(4, ref('group_trm_supervisor'))]"/>
+        </record>
+
+        <record id="trm_lead_group_user_rule" model="ir.rule">
+            <field name="name">trm_lead_group_user_rule</field>
+            <field name="model_id" ref="model_th_trm_lead"/>
+            <field name="groups" eval="[(4, ref('group_trm_user'))]"/>
+            <field name="domain_force">[('th_user_id', '=', user.id)]</field>
+        </record>
+
+        <record id="trm_lead_group_manager_rule" model="ir.rule">
+            <field name="name">trm_lead_group_manager_rule</field>
+            <field name="model_id" ref="model_th_trm_lead"/>
+            <field name="groups" eval="[(4, ref('group_trm_manager'))]"/>
+            <field name="domain_force">['|', ('th_user_id', '=', user.id), ('th_team_leader_ids', 'in', user.ids)]</field>
+        </record>
+
+        <record id="trm_lead_group_supervisor_rule" model="ir.rule">
+            <field name="name">trm_lead_group_supervisor_rule</field>
+            <field name="model_id" ref="model_th_trm_lead"/>
+            <field name="groups" eval="[(4, ref('group_trm_supervisor'))]"/>
+            <field name="domain_force"></field>
+        </record>
+
+        <record id="trm_lead_group_admin_rule" model="ir.rule">
+            <field name="name">trm_lead_group_admin_rule</field>
+            <field name="model_id" ref="model_th_trm_lead"/>
+            <field name="groups" eval="[(4, ref('group_trm_admin'))]"/>
+        </record>
+    </data>
+</odoo>

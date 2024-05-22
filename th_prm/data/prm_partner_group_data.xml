@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="prm_duplicate_partner_group" model="prm.partner.group">
+            <field name="name">TIMDOITAC(trùng)</field>
+            <field name="th_description">Đối tác trùng khi nhập thông tin từ form nhúng, muốn được chăm sóc trở lại
+            </field>
+        </record>
+    </data>
+</odoo>

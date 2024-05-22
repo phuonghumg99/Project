@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="pom_lead_view_search" model="ir.ui.view">
+        <field name="name">pom.lead.search</field>
+        <field name="model">pom.lead</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="th_partner_phone"
+                       filter_domain="['|', ('th_partner_id.phone', 'ilike', self), ('th_partner_id.phone', 'ilike', self)]"/>
+                <field name="th_partner_phone2"
+                       filter_domain="['|', ('th_partner_id.phone', 'ilike', self), ('th_partner_id.th_phone2', 'ilike', self)]"/>
+                <field name="th_partner_email" filter_domain="[('th_partner_id.email', 'ilike', self)]"/>
+                <field name="th_partner_code" string="Mã đối tác"/>
+                <field name="th_user_id"/>
+                <field name="name" string="Tên Cơ hội"/>
+                <field name="th_partner_group_ids"/>
+                <field name="th_collaborative_products_ids"/>
+                <field name="th_reuse_source"/>
+                <field name="th_partner_level"/>
+                <field name="th_partner_id" string="Tên đối tác"
+                       filter_domain="[('th_partner_id.display_name','ilike',self)]"/>
+                <field name="th_call_status_detail_id" string="Trạng thái chi tiết"
+                       filter_domain="[('th_call_status_detail_id.name','ilike',self)]"/>
+                <separator/>
+                <filter name="user_id" string="Chưa có người phụ trách" domain="[('th_user_id', '=', False)]"/>
+                <filter name="lead_today" string="Cơ hội hôm nay"
+                        domain="[('create_date', '&gt;', (context_today() - datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]"/>
+                <group>
+                    <filter name="last_check" string="Liên hệ lần cuối" context="{'group_by':'th_last_check:day'}"/>
+                    <filter name="last_check_1" string="Liên hệ cuối từ 1 ngày trở lên"
+                            domain="[('th_last_check', '&lt;', (context_today() - datetime.timedelta(days=0)))]"/>
+                    <filter name="last_check_4" string="Liên hệ cuối từ 4 ngày trở lên"
+                            domain="[('th_last_check', '&lt;', (context_today() - datetime.timedelta(days=3)))]"/>
+                    <filter name="last_check_15" string="Liên hệ cuối từ 15 ngày trở lên"
+                            domain="[('th_last_check', '&lt;', (context_today() - datetime.timedelta(days=14)))]"/>
+                    <filter name="last_check_30" string="Liên hệ cuối từ 30 ngày trở lên"
+                            domain="[('th_last_check', '&lt;', (context_today() - datetime.timedelta(days=29)))]"/>
+                </group>
+                <searchpanel>
+                    <field name="th_stage_id" icon="fa-user-plus" enable_counters="1"/>
+                    <field name="th_call_status" icon="fa-phone" enable_counters="1"/>
+                    <field name="th_call_status_detail_id" icon="fa-phone" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="pom_lead_view_form" model="ir.ui.view">
+        <field name="name">pom.lead.form</field>
+        <field name="model">pom.lead</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="th_stage_id" widget="th_statusbar" class="o_field_statusbar"
+                           options="{'clickable': '1'}"
+                           invisible="context.get('not_open_prm', False)"/>
+                    />
+                </header>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_prm_lead" type="object" invisible="context.get('not_open_prm', False)"
+                                attrs="{'invisible': [('th_prm_lead_count', '=', 0)]}"
+                                class="oe_stat_button" icon="fa-id-card-o">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="th_prm_lead_count"/>
+                                </span>
+                                <span class="o_stat_text">PRM</span>
+                            </div>
+                        </button>
+                        <button name="action_open_profile" type="object" class="oe_stat_button"
+                                icon="fa-address-card"
+                                attrs="{'invisible': [('th_partner_id', '=', False)]}">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">
+                                    Hồ Sơ
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <field name="is_invisible_th_reason_quit_id" invisible="1"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" class="text-break"/>
+                        </h1>
+                        <h4 class="d-flex gap-2 g-0 pb-3">
+                            <div style="width: 15%; min-width: 4rem;">
+                                <label for="th_partner_code"/>
+                                <br/>
+                                <field name="th_partner_code"/>
+                            </div>
+                            <div style="width: 15%; min-width: 4rem;">
+                                <label for="th_last_check"/>
+                                <br/>
+                                <field name="th_last_check" widget="remaining_days" readonly="1"/>
+                            </div>
+                        </h4>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="th_reuse_source" readonly="1"
+                                   attrs="{'invisible': [('th_reuse_source', '=', False)]}"/>
+                            <field name="th_partner_id" readonly="1" options='{"no_open": True}'/>
+                            <field name="th_partner_email"/>
+                            <field name="th_partner_phone"/>
+                            <field name="th_partner_phone2"/>
+                            <field name="th_ownership_unit_id" readonly="1"
+                                   options='{"no_open": True, "no_create": True}'/>
+                            <field name="th_user_id" options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="th_commission_policy" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="th_partner_group_ids" widget="many2many_tags"
+                                   options="{'no_create': True, 'color_field': 'th_color'}"/>
+                            <field name="th_partner_source_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="th_collaborative_products_ids" string="Sản phẩm hợp tác *" required="1"
+                                   widget="many2many_tags"
+                                   options="{'no_create': True, 'color_field': 'th_color'}"/>
+                            <field name="th_call_status" string="Tình trạng gọi *"
+                                   options="{'no_create': True, 'no_open': True}" required="1"/>
+                            <field name="th_call_status_detail_id" string="Trạng thái chi tiết *"
+                                   options="{'no_create': True, 'no_open': True}"
+                                   attrs="{'invisible': [('th_call_status', '=', False)]}" required="True"/>
+                            <field name="th_reason_quit_id"
+                                   string="Lý do ngừng hợp tác *"
+                                   options="{'no_create': True, 'no_open': True}"
+                                   attrs="{'invisible': [('is_invisible_th_reason_quit_id', '=', True)], 'required': [('is_invisible_th_reason_quit_id', '=', False)]}"/>
+                            <field name="th_reason_quit_detail_id"
+                                   string="Chi tiết lý do ngừng *"
+                                   attrs="{'invisible': [('th_reason_quit_id', '=', False)], 'required': [('th_reason_quit_id', '!=', False)]}"
+                                   options="{'no_create': True, 'no_open': True}"/>
+                            <field name="th_team_leader_ids" widget="many2many_tags" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="description" string="Mô tả">
+                            <field name="th_description"/>
+                        </page>
+                        <page name="extra_info" string="Thông tin bổ sung">
+                            <group>
+                                <group>
+                                    <field name="th_partner_reference_id" options="{'no_create': True, 'no_open': True}"
+                                           attrs="{'readonly': [('th_check_partner_referred', '=', True)]}"/>
+                                    <field name="th_check_partner_referred" invisible="1"/>
+                                    <field name="th_affiliate_marketing_code"/>
+                                    <field name="th_partner_level"/>
+                                    <field name="th_partner_status"/>
+                                    <field name="th_suspend_status"
+                                           attrs="{'invisible': [('th_partner_status', '!=', 'suspending')], 'required': [('th_partner_status', '=', 'suspending')]}"/>
+                                    <field name="th_level_up_date_c0" readonly="1"/>
+                                    <field name="th_level_up_date" readonly="1"/>
+                                    <field name="th_stop_date" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="th_city_id"
+                                           options='{"no_open": True, "no_create": True}'/>
+                                    <field name="th_district_id"
+                                           options='{"no_open": True, "no_create": True}'
+                                           attrs="{'invisible': [('th_city_id', '=', False)]}"/>
+                                    <field name="th_ward_id"
+                                           options='{"no_open": True, "no_create": True}'
+                                           attrs="{'invisible': [('th_district_id', '=', False)]}"/>
+                                    <field name="th_contract_number"/>
+                                    <field name="th_contract_sign_date"/>
+                                    <field name="th_contract_file" widget="many2many_binary"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="" string="Ngân hàng">
+                            <field name="th_bank_ids">
+                                <tree no_open="1">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="bank_id" required="1" string="Ngân hàng"/>
+                                    <!--                                    <field name="partner_id" invisible="1"/>-->
+                                    <field name="acc_holder_name"/>
+                                    <field name="acc_number" string="Số tài khoản"/>
+                                    <!--                                    <field name="th_branch_name"/>-->
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="pom_lead_view_tree" model="ir.ui.view">
+        <field name="name">pom.lead.tree</field>
+        <field name="model">pom.lead</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <tree multi_edit="1">
+                <field name="th_partner_code" widget="tree_url"/>
+                <field name="th_reuse_source" optional="hide" readonly="1" widget="tree_url"/>
+                <field name="th_partner_id" optional="show" options="{'no_create_edit': True, 'no_open': True}"
+                       readonly="1"/>
+                <field name="th_ownership_unit_id" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                <field name="th_user_id" optional="show" options="{'no_create': True}" readonly="1"/>
+                <field name="th_partner_phone" optional="show"/>
+                <field name="th_partner_email" optional="show"/>
+                <field name="th_city_id" optional="show"/>
+                <field name="th_call_status" optional="show" options="{'no_create': True, 'no_open': True}"
+                       required="1"/>
+                <field name="th_call_status_detail_id" optional="show" options="{'no_create': True, 'no_open': True}"
+                       required="1"/>
+                <field name="th_stage_id" optional="show" options="{'no_create': True, 'no_open': True}"/>
+                <field name="th_partner_group_ids" widget="many2many_tags" optional="show"
+                       options="{'no_create': True, 'color_field': 'th_color'}" required="1"/>
+                <field name="th_collaborative_products_ids" widget="many2many_tags"
+                       options='{"no_open": True, "no_create": True}' required="1"/>
+                <field name="th_last_check" widget="remaining_days" optional="show" readonly="1"/>
+                <field name="th_description" class="test" optional="show"/>
+                <field name="th_partner_level" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pom_lead_archives_view_tree" model="ir.ui.view">
+        <field name="name">pom.lead.archives.tree</field>
+        <field name="model">pom.lead</field>
+        <field name="inherit_id" ref="pom_lead_view_tree"/>
+        <field name="mode">primary</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="js_class">prm_lead_list</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_pom_lead_view" model="ir.actions.act_window">
+        <field name="name">POM</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pom.lead</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'create': True, 'default_th_ownership_unit_id': active_id}</field>
+        <field name="view_id" ref="pom_lead_archives_view_tree"/>
+        <field name="domain">[('th_type', '=', 'pom'), ('th_storage', '=', False), ('th_ownership_unit_id', '=',
+            active_id)]
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chưa có dữ liệu
+            </p>
+        </field>
+    </record>
+
+</odoo>

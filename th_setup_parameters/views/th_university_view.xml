@@ -1,0 +1,110 @@
+<odoo>
+    <record id="th_university_view_tree" model="ir.ui.view">
+        <field name="name">th_university_view_tree</field>
+        <field name="model">th.origin</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="th_code"/>
+                <field name="name"/>
+                <field name="th_university_major_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="th_university_view_form" model="ir.ui.view">
+        <field name="name">th_university_view_form</field>
+        <field name="model">th.origin</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <label for="name"/>
+                    <div class="oe_title">
+                        <h3><field name="name"/></h3>
+                    </div>
+                    <group>
+
+                        <field name="th_code" style="width:50%"/>
+                        <field name="th_module_ids" widget="many2many_tags" required="1" style="width:50%" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="th_address" style="width:50%"/>
+                        <field name="th_description"/>
+                    </group>
+                    <notebook>
+                        <page string="Liên hệ" name="info_partner">
+                            <field name="th_partner_id" mode="kanban" >
+                                <kanban>
+                                    <field name="id" modifiers="{&quot;readonly&quot;: true}"/>
+                                    <field name="color"/>
+                                    <field name="name" on_change="1"/>
+                                    <field name="title"/>
+                                    <field name="type" on_change="1"/>
+                                    <field name="email" on_change="1"/>
+                                    <field name="parent_id" on_change="1"/>
+                                    <field name="is_company" on_change="1"/>
+                                    <field name="function"/>
+                                    <field name="phone" on_change="1"/>
+                                    <field name="street" on_change="1"/>
+                                    <field name="street2"/>
+                                    <field name="zip" on_change="1"/>
+                                    <field name="city" on_change="1"/>
+                                    <field name="country_id" on_change="1"/>
+                                    <field name="mobile" on_change="1"/>
+                                    <field name="state_id" on_change="1"/>
+                                    <field name="image_128" on_change="1" modifiers="{&quot;readonly&quot;: true}"/>
+                                    <field name="avatar_128" modifiers="{&quot;readonly&quot;: true}"/>
+                                    <field name="lang" on_change="1"/>
+                                    <!-- fields in form x2many view to diminish requests -->
+                                    <field name="comment"/>
+                                    <field name="display_name" on_change="1" modifiers="{&quot;readonly&quot;: true}"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <t t-set="color" t-value="kanban_color(record.color.raw_value)"/>
+                                            <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
+                                                <div class="o_kanban_image">
+                                                    <img alt="Contact image" t-att-src="kanban_image('res.partner', 'avatar_128', record.id.raw_value)"/>
+                                                </div>
+                                                <div class="oe_kanban_details">
+                                                    <field name="name" on_change="1"/>
+                                                    <div t-if="record.function.raw_value"><field name="function"/></div>
+                                                    <div t-if="record.email.raw_value"><field name="email" widget="email" on_change="1"/></div>
+                                                    <div t-if="record.type.raw_value != 'contact'">
+                                                        <div>
+                                                            <field name="zip" on_change="1"/><t t-if="record.city"> </t>
+                                                            <field name="city" on_change="1"/>
+                                                        </div>
+                                                        <field t-if="record.state_id.raw_value" name="state_id" on_change="1"/><t t-if="record.country_id"> </t>
+                                                        <field name="country_id" on_change="1"/>
+                                                    </div>
+                                                    <div t-if="record.phone.raw_value">Phone: <t t-esc="record.phone.value"/></div>
+                                                    <div t-if="record.mobile.raw_value">Mobile: <t t-esc="record.mobile.value"/></div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </page>
+                        <page string="Ngành học" name="majors">
+                            <field name="th_university_major_ids">
+                                <tree editable="bottom">
+                                    <field name="th_major_code_university" required="1" />
+                                    <field name="th_major_id" required="1" options="{'no_create': 1, 'no_open':1}"/>
+                                    <field name="th_origin_id" invisible="1"/>
+<!--                                    <field name="th_subject"/>-->
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="th_university_view_act" model="ir.actions.act_window">
+        <field name="name">Xuất xứ</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">th.origin</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'delete': 0}</field>
+    </record>
+
+</odoo>

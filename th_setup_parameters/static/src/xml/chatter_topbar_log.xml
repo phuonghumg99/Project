@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="ChatterTopbar" t-inherit="mail.ChatterTopbar" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o_ChatterTopbar_rightSection')]/child::*" position="before">
+            <button class="o_ChatterTopbar_button o_ChatterTopbar_buttonAddAttachments btn btn-light btn-primary"
+                    type="button" t-on-click="chatterTopbar.chatter.onClickShowMessageSystem" title="Lịch sử hệ thống">
+                <i class="fa fa-cogs" role="img" aria-label="Attachments"></i>
+            </button>
+        </xpath>
+    </t>
+</templates>

@@ -1,0 +1,350 @@
+<odoo>
+    <record id="th_lecturer_profile_view_tree" model="ir.ui.view">
+        <field name="name">th_lecturer_profile_view_tree</field>
+        <field name="model">th.lecturer.profile</field>
+        <field name="arch" type="xml">
+            <tree string="" multi_edit="1">
+                <field name="th_customer_code" optional="show" widget="tree_url"/>
+                <field name="th_affiliate_code" optional="show" widget="tree_url"/>
+                <field name="th_partner_id" string="Tên giảng viên *"
+                       options='{"no_open": True, "no_quick_create": True}' required="1"
+                       readonly="1" optional="show"/>
+                <field name="th_subjects_taught" widget="many2many_tags" optional="show"
+                       options='{"no_open": True, "no_create": True}'/>
+                <field name="th_lecturers_code" optional="show"/>
+                <field name="th_trm_phone" optional="show"/>
+                <field name="th_trm_phone2" optional="show"/>
+                <field name="th_trm_email" optional="show"/>
+                <field name="th_legal_records" optional="show"/>
+                <field name="th_date_of_delivery" optional="show"/>
+                <field name="th_handover_status" optional="show"/>
+                <field name="th_date_of_receipt" optional="show"/>
+                <field name="th_profile_status" optional="show"/>
+                <field name="th_trm_other" optional="show"/>
+                <field name="th_reason" optional="show"/>
+                <field name="th_ethnicity_id" optional="hide"/>
+                <field name="th_religion_id" optional="hide"/>
+                <field name="th_gender" optional="hide"/>
+                <field name="th_meet_certificate" optional="hide"/>
+                <field name="th_certificate_number" optional="hide"/>
+                <field name="th_trm_qualifications" string="Bằng cấp 1" optional="hide"/>
+                <field name="th_trm_qualifications1" string="Bằng cấp 2" optional="hide"/>
+                <field name="th_trm_certificate" string="Chứng chỉ 1" optional="hide"/>
+                <field name="th_trm_certificate1" string="Chứng chỉ 2" optional="hide"/>
+                <field name="th_graduation_year" optional="hide"/>
+                <field name="th_form_of_train" optional="hide"/>
+                <field name="th_major_studied" optional="hide"/>
+                <field name="th_unit_for_work" optional="hide"/>
+                <field name="th_legal_records" optional="hide"/>
+                <field name="th_moral_qualities" optional="hide"/>
+                <field name="th_pedagogical_ability" optional="hide"/>
+                <field name="th_famous" optional="hide"/>
+                <field name="th_charisma" optional="hide"/>
+                <field name="th_appearance" optional="hide"/>
+                <field name="th_voice" optional="hide"/>
+                <field name="th_skill" optional="hide"/>
+                <field name="th_experience" optional="hide"/>
+                <field name="th_citizen_identification" optional="hide"/>
+                <field name="th_tax_no" optional="hide"/>
+                <field name="th_contract_number" optional="hide"/>
+                <field name="th_contract_sign_date" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="th_lecturer_profile_view_form" model="ir.ui.view">
+        <field name="name">th_lecturer_profile_view_form</field>
+        <field name="model">th.lecturer.profile</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button name="action_create_trm_lead" string="Tạo cơ hội sản xuất" type="object" invisible="context.get('invisible_button')"
+                            class="oe_highlight"
+                            confirm="Bạn muốn tạo cơ hội sản xuất cho giảng viên này?"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_registered_subject" type="object" class="oe_stat_button"
+                                invisible="context.get('invisible_button')"
+                                icon="fa-graduation-cap">
+                            <div class="o_stat_info">
+                                <field name="th_quantity" readonly="1" class="o_stat_value"/>
+                                <span class="">
+                                    Cơ hội sản xuất
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="oe_title">
+                        <h1>
+                            <field class="text-break" name="name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <notebook>
+                        <page string="Sơ yếu lý lịch">
+                            <group>
+                                <group name="info_partner" string="Thông tin cá nhân">
+                                    <field name="th_partner_id" string="Tên giảng viên *"
+                                           options='{"no_quick_create": True}'
+                                           required="1" attrs="{'readonly': ['|', ('id', '!=', False), ('th_quantity', '>', 0)]}"  context="{'trm_contact': True}"/>
+                                    <field name="th_customer_code"/>
+                                    <field name="th_getfly_code" invisible="1"/>
+                                    <field name="th_affiliate_code"/>
+                                    <field name="th_trm_email"/>
+                                    <field name="th_trm_phone"/>
+                                    <field name="th_trm_phone2"/>
+                                    <field name="th_subjects_taught" widget="many2many_tags"
+                                           options='{"no_open": True, "no_create": True}'/>
+                                </group>
+                                <group string="">
+                                    <label for="th_ethnicity_id"/>
+                                    <div class="o_row">
+                                        <field name="th_ethnicity_id" options='{"no_open": True, "no_create": True}'/>
+                                        <label for="th_religion_id"/>
+                                        <field name="th_religion_id" options='{"no_open": True, "no_create": True}'/>
+                                    </div>
+                                    <label for="th_place_of_birth_id"/>
+                                    <div class="o_row">
+                                        <field name="th_place_of_birth_id"
+                                               options='{"no_open": True, "no_create": True}'/>
+                                        <label for="th_birthday"/>
+                                        <field name="th_birthday"/>
+                                    </div>
+                                    <field name="th_gender" string="Giới tính *" required="1"/>
+                                    <label for="th_district_id" string="Địa chỉ"/>
+                                    <div class="o_address_format">
+                                        <field name="th_country_id" placeholder="Quốc gia" class="o_address_country"
+                                               options='{"no_open": True, "no_create": True}'/>
+                                        <field name="th_state_id" class="o_address_state" style="width:100%"
+                                               placeholder="Tỉnh/ Thành phố"
+                                               options='{"no_open": True, "no_create": True}'/>
+                                        <field name="th_district_id" placeholder="Quận / Huyện"
+                                               class="o_address_district"
+                                               style="width:50%" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="th_ward_id" placeholder="Xã / Phường" class="o_address_ward"
+                                               style="width:50%" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="th_street" id="street_page_lead" placeholder="Đường phố..."
+                                               class="o_address_street"/>
+                                    </div>
+                                    <label for="th_street_workplace"/>
+                                    <div class="o_address_format">
+                                        <field name="th_country_workplace_id" placeholder="Quốc gia"
+                                               class="o_address_country"
+                                               options='{"no_open": True, "no_create": True}'/>
+                                        <field name="th_state_workplace_id" class="o_address_state" style="width:100%"
+                                               placeholder="Tỉnh/ Thành phố"
+                                               options='{"no_open": True, "no_create": True}'/>
+                                        <field name="th_district_workplace" placeholder="Quận / Huyện"
+                                               class="o_address_district"
+                                               options='{"no_open": True, "no_create": True}'
+                                               style="width:50%"/>
+                                        <field name="th_ward_workplace" placeholder="Xã / Phường"
+                                               class="o_address_ward"
+                                               options='{"no_open": True, "no_create": True}'
+                                               style="width:50%"/>
+                                        <field name="th_street_workplace" placeholder="Đường phố..."
+                                               class="o_address_street"/>
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="other_info" string="Bằng cấp chứng chỉ">
+                            <group>
+                                <group string="Bổ sung">
+                                    <field name="th_lecturers_code"/>
+                                    <field name="th_meet_certificate"/>
+                                    <field name="th_certificate_number"/>
+                                    <label for="th_trm_qualifications"/>
+                                    <div class="o_address_format">
+                                        <field name="th_trm_qualifications" string="" placeholder="Bằng cấp 1 ..."/>
+                                        <field name="th_trm_qualifications1" string="" placeholder="Bằng cấp 2 ..."/>
+                                    </div>
+                                    <label for="th_trm_certificate"/>
+                                    <div class="o_address_format">
+                                        <field name="th_trm_certificate" string="" placeholder="Chứng chỉ 1 ..."/>
+                                        <field name="th_trm_certificate1" string="" placeholder="Chứng chỉ 2 ..."/>
+                                    </div>
+
+                                </group>
+                                <group string="">
+                                    <field name="th_graduation_year"/>
+                                    <field name="th_form_of_train"/>
+                                    <field name="th_major_studied"/>
+                                    <field name="th_unit_for_work"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Tiêu chí đánh giá">
+                            <group>
+                                <group string="Đặc thù">
+                                    <field name="th_legal_records"/>
+                                    <field name="th_moral_qualities"/>
+                                    <field name="th_pedagogical_ability"/>
+                                    <field name="th_famous"/>
+                                    <field name="th_charisma"/>
+                                </group>
+                                <group string="">
+                                    <field name="th_appearance"/>
+                                    <field name="th_voice"/>
+                                    <field name="th_skill"/>
+                                    <field name="th_experience"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Thông tin thanh toán">
+                            <group>
+                                <group string="Tài khoản">
+                                    <div style="width: auto; min-width: 450px;">
+                                        <label for="th_bank_ids"/>
+                                        <div class="d-flex align-items-end">
+                                            <field name="th_bank_ids" context="{'default_partner_id': th_partner_id}">
+                                                <tree editable="bottom">
+                                                    <field name="sequence" widget="handle"/>
+                                                    <field name="bank_id" required="1" string="Ngân hàng"/>
+                                                    <field name="partner_id" invisible="1"/>
+                                                    <field name="acc_holder_name"/>
+                                                    <field name="acc_number" string="Số tài khoản"/>
+                                                    <field name="th_branch_name"/>
+                                                </tree>
+                                            </field>
+                                        </div>
+                                    </div>
+
+                                </group>
+                                <group string="">
+                                    <label for="th_citizen_identification"/>
+                                    <div class="o_row">
+                                        <field name="th_citizen_identification"/>
+                                        <label for="th_date_identification"/>
+                                        <field name="th_date_identification"/>
+                                    </div>
+                                    <field name="th_place_identification"/>
+                                    <field name="th_citizen_identification_image_filename" invisible="1"/>
+                                    <field name="th_citizen_identification_image"
+                                           filename="th_citizen_identification_image_filename"/>
+                                    <field name="th_tax_no"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="info_profile" string="Hồ sơ">
+                            <group>
+                                <group name="" string="Hồ sơ">
+                                    <field name="th_date_of_delivery"/>
+                                    <field name="th_handover_status"/>
+                                    <field name="th_trm_other"/>
+                                    <field name="th_profile_file" widget="many2many_binary"/>
+                                </group>
+                                <group string="">
+                                    <field name="th_date_of_receipt"/>
+                                    <field name="th_profile_status"/>
+                                    <field name="th_reason"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Hợp đồng">
+                            <group>
+                                <group string="Hợp đồng đã ký">
+                                    <field name="th_contract_number"/>
+                                    <field name="th_contract_sign_date"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="th_lecturer_profile_filter" model="ir.ui.view">
+        <field name="name">th_lecturer_profile_filter</field>
+        <field name="model">th.lecturer.profile</field>
+        <field name="arch" type="xml">
+            <search string="">
+                <field name="name"/>
+                <field name="th_customer_code"/>
+                <field name="th_affiliate_code"/>
+                <field name="th_subjects_taught"/>
+                <field name="th_trm_phone"
+                       filter_domain="['|', ('th_partner_id.phone', 'ilike', self), ('th_partner_id.phone', 'ilike', self)]"/>
+                <field name="th_trm_phone2"
+                       filter_domain="['|', ('th_partner_id.phone', 'ilike', self), ('th_partner_id.th_phone2', 'ilike', self)]"/>
+                <field name="th_trm_email" filter_domain="[('th_partner_id.email', 'ilike', self)]"/>
+                <field name="th_partner_id" filter_domain="[('th_partner_id.name', 'ilike', self)]"/>
+                <field name="th_date_of_delivery"/>
+                <field name="th_date_of_receipt"/>
+                <field name="th_trm_other"/>
+                <field name="th_reason"/>
+                <field name="th_ethnicity_id"/>
+                <field name="th_certificate_number"/>
+                <field name="th_trm_qualifications" string="Bằng cấp 1"/>
+                <field name="th_trm_qualifications1" string="Bằng cấp 2"/>
+                <field name="th_trm_certificate" string="Chứng chỉ 1"/>
+                <field name="th_trm_certificate1" string="Chứng chỉ 2"/>
+                <field name="th_graduation_year"/>
+                <field name="th_form_of_train"/>
+                <field name="th_major_studied"/>
+                <field name="th_unit_for_work"/>
+                <field name="th_moral_qualities"/>
+                <field name="th_pedagogical_ability"/>
+                <field name="th_famous"/>
+                <field name="th_charisma"/>
+                <field name="th_appearance"/>
+                <field name="th_voice"/>
+                <field name="th_skill"/>
+                <field name="th_experience"/>
+                <field name="th_citizen_identification"/>
+                <field name="th_tax_no"/>
+                <field name="th_contract_number"/>
+                <field name="th_contract_sign_date"/>
+                <field name="th_state_id" string="Địa chỉ - Tỉnh/ Thành phố"/>
+                <field name="th_district_id" string="Địa chỉ - Quận/ Huyện"/>
+                <field name="th_ward_id" string="Địa chỉ - Phường/ Xã"/>
+                <field name="th_street" string="Địa chỉ - Đường phố"/>
+                <field name="th_state_workplace_id" string="Địa chỉ làm việc - Tỉnh/ Thành phố"/>
+                <field name="th_district_workplace" string="Địa chỉ làm việc - Quận/ Huyện"/>
+                <field name="th_ward_workplace" string="Địa chỉ làm việc - Phường/ Xã"/>
+                <field name="th_street_workplace" string="Địa chỉ làm việc - Đường phố"/>
+                <field name="th_meet_certificate"/>
+                <filter name="th_trm_qualifications" string="Bằng cấp 1"
+                        domain="[('th_trm_qualifications', '!=', False)]"/>
+                <filter name="th_trm_qualifications1" string="Bằng cấp 2"
+                        domain="[('th_trm_qualifications1', '!=', False)]"/>
+                <filter name="th_trm_certificate" string="Chứng chỉ 1" domain="[('th_trm_certificate', '!=', False)]"/>
+                <filter name="th_trm_certificate1" string="Chứng chỉ 2"
+                        domain="[('th_trm_certificate1', '!=', False)]"/>
+                <group>
+                    <filter name="th_date_of_delivery" string="Ngày bàn giao"
+                            context="{'group_by':'th_date_of_delivery:day'}"/>
+                    <filter name="th_date_of_receipt" string="Ngày nhận Hồ Sơ"
+                            context="{'group_by':'th_date_of_receipt:day'}"/>
+                </group>
+                <searchpanel>
+                    <field name="th_lecturers_code" icon="" enable_counters="1"/>
+                    <field name="th_legal_records" icon="" enable_counters="1"/>
+                    <field name="th_handover_status" icon="fa-handshake-o" enable_counters="1"/>
+                    <field name="th_profile_status" icon="fa-archive" enable_counters="1"/>
+                    <field name="th_meet_certificate" icon="fa-archive" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="th_lecturer_profile_view_act" model="ir.actions.act_window">
+        <field name="name">Hồ sơ</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">th.lecturer.profile</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chưa có dữ liệu
+            </p>
+        </field>
+    </record>
+</odoo>

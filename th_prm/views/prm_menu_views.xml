@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="prm_menu_root" name="PRM" sequence="26" web_icon="th_prm,static/description/icon.png" groups="group_prm_user"/>
+        <menuitem id="prm_menu_lead" name="PRM" parent="prm_menu_root" sequence="1" action="prm_lead_ownership_unit_action" groups="group_prm_user"/>
+        <menuitem id="pom_menu_lead" name="POM" parent="prm_menu_root" sequence="2" action="pom_lead_ownership_unit_action" groups="group_prm_user"/>
+        <menuitem id="th_prm_menu_storage" name="Kho lưu trữ" parent="prm_menu_root" sequence="3" groups="group_prm_administrator"/>
+            <menuitem id="prm_menu_storage" name="Kho PRM" parent="th_prm_menu_storage" sequence="1" action="prm_warehouse_ownership_unit_action"/>
+            <menuitem id="pom_menu_storage" name="Kho POM" parent="th_prm_menu_storage" sequence="2" action="pom_warehouse_ownership_unit_action"/>
+        <menuitem id="prm_menu_config" name="Cấu hình" parent="prm_menu_root" sequence="4" groups="group_prm_administrator"/>
+            <menuitem id="prm_config_menu_level" name="Mối quan hệ" parent="prm_menu_config" sequence="1" action="prm_level_action" groups="group_prm_administrator"/>
+            <menuitem id="prm_config_menu_partner_group" name="Nhóm đối tác" parent="prm_menu_config" sequence="3" action="action_prm_partner_group_view"/>
+            <menuitem id="prm_config_menu_partner_source" name="Nguồn đối tác" parent="prm_menu_config" sequence="4" action="action_prm_partner_source_view"/>
+            <menuitem id="prm_config_menu_collaborative_products" name="Sản phẩm hợp tác" parent="prm_menu_config" sequence="5" action="action_prm_collaborative_products_view"/>
+            <menuitem id="prm_config_menu_commission_policy" name="Chính sách hợp tác" parent="prm_menu_config" sequence="6" action="action_prm_commission_policy_view"/>
+            <menuitem id="prm_config_menu_reason_quit" name="Lý do ngừng hợp tác" parent="prm_menu_config" sequence="7" action="action_prm_reason_quit_view"/>
+            <menuitem id="prm_config_menu_call_status" name="Tình trạng gọi" parent="prm_menu_config" sequence="8" action="action_prm_call_status_view"/>
+            <menuitem id="prm_config_menu_team" name="Đội nhóm" parent="prm_menu_config" sequence="9" action="action_prm_team_view"/>
+        <menuitem id="prm_menu_import" name="Import PRM" parent="prm_menu_root" sequence="5" groups="base.group_no_one"/>
+            <menuitem id="prm_menu_import_prm" name="Import PRM" parent="prm_menu_import" sequence="1" action="th_import_prm_action"/>
+</odoo>

@@ -1,0 +1,98 @@
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/models/activity_view.js:0
+#, python-format
+msgid "Due in %s days:"
+msgstr "Đến hạn sau %s ngày:"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/models/activity_view.js:0
+#, python-format
+msgid "for %s"
+msgstr "cho %s"
+
+#. module: mail
+#. odoo-javascript
+#: code:addons/mail/static/src/components/activity_menu_view/activity_menu_view.xml:0
+#: code:addons/mail/static/src/components/activity_menu_view/activity_menu_view.xml:0
+#: code:addons/mail/static/src/components/chatter_topbar/chatter_topbar.xml:0
+#: code:addons/mail/static/src/models_data/emoji_data.js:0
+#: model:ir.actions.act_window,name:mail.mail_activity_action
+#: model:ir.model.fields,field_description:mail.field_mail_activity_mixin__activity_ids
+#: model:ir.model.fields,field_description:mail.field_res_partner__activity_ids
+#: model:ir.model.fields,field_description:mail.field_res_users__activity_ids
+#: model:ir.ui.menu,name:mail.menu_mail_activities
+#: model:mail.message.subtype,name:mail.mt_activities
+#: model_terms:ir.ui.view,arch_db:mail.mail_activity_type_view_form
+#: model_terms:ir.ui.view,arch_db:mail.mail_activity_type_view_search
+#: model_terms:ir.ui.view,arch_db:mail.mail_activity_type_view_tree
+#, python-format
+msgid "Activities"
+msgstr "Lịch hẹn"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/fields/remaining_days/remaining_days_field.xml:0
+#, python-format
+msgid "days ago"
+msgstr "ngày trước"
+
+#. module: portal
+#: model:ir.model.fields,field_description:portal.field_portal_wizard_user__login_date
+msgid "Latest Authentication"
+msgstr "Xác thực mới nhất"
+
+#. module: portal
+#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+msgid ""
+"This text is included at the end of the email sent to new portal users."
+msgstr "Văn bản này được đính kèm ở cuối email gửi cho người dùng cổng thông tin mới"
+
+#. module: portal
+#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+msgid "Revoke Access"
+msgstr "Thu hồi truy cập"
+
+#. module: portal
+#: model_terms:ir.ui.view,arch_db:portal.wizard_view
+msgid "Re-Invite"
+msgstr "Mời lại"
+
+#. module: th_prm
+#: model:ir.model.fields,field_description:th_prm.field_pom_lead__create_uid
+#: model:ir.model.fields,field_description:th_prm.field_prm_assign_leads__create_uid
+#: model:ir.model.fields,field_description:th_prm.field_prm_collaborative_products__create_uid
+#: model:ir.model.fields,field_description:th_prm.field_prm_commission_policy__create_uid
+#: model:ir.model.fields,field_description:th_prm.field_prm_lead__create_uid
+#: model:ir.model.fields,field_description:th_prm.field_prm_lead_reuse__create_uid
+#: model:ir.model.fields,field_description:th_prm.field_prm_level__create_uid
+#: model:ir.model.fields,field_description:th_prm.field_prm_partner_group__create_uid
+#: model:ir.model.fields,field_description:th_prm.field_prm_partner_level__create_uid
+#: model:ir.model.fields,field_description:th_prm.field_prm_partner_source__create_uid
+#: model:ir.model.fields,field_description:th_prm.field_prm_reason_quit__create_uid
+#: model:ir.model.fields,field_description:th_prm.field_prm_reason_quit_detail__create_uid
+#: model:ir.model.fields,field_description:th_prm.field_prm_team__create_uid
+#: model:ir.model.fields,field_description:th_prm.field_th_formio_builder_field_default__create_uid
+#: model:ir.model.fields,field_description:th_prm.field_th_import_prm__create_uid
+msgid "Created by"
+msgstr "Người tạo"
+
+#. module: th_prm
+#: model:ir.model.fields,field_description:th_prm.field_pom_lead__create_date
+#: model:ir.model.fields,field_description:th_prm.field_prm_assign_leads__create_date
+#: model:ir.model.fields,field_description:th_prm.field_prm_collaborative_products__create_date
+#: model:ir.model.fields,field_description:th_prm.field_prm_commission_policy__create_date
+#: model:ir.model.fields,field_description:th_prm.field_prm_lead__create_date
+#: model:ir.model.fields,field_description:th_prm.field_prm_lead_reuse__create_date
+#: model:ir.model.fields,field_description:th_prm.field_prm_level__create_date
+#: model:ir.model.fields,field_description:th_prm.field_prm_partner_group__create_date
+#: model:ir.model.fields,field_description:th_prm.field_prm_partner_level__create_date
+#: model:ir.model.fields,field_description:th_prm.field_prm_partner_source__create_date
+#: model:ir.model.fields,field_description:th_prm.field_prm_reason_quit__create_date
+#: model:ir.model.fields,field_description:th_prm.field_prm_reason_quit_detail__create_date
+#: model:ir.model.fields,field_description:th_prm.field_prm_team__create_date
+#: model:ir.model.fields,field_description:th_prm.field_th_formio_builder_field_default__create_date
+#: model:ir.model.fields,field_description:th_prm.field_th_import_prm__create_date
+msgid "Created on"
+msgstr "Ngày tạo"

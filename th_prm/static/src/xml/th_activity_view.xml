@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="th_prm.ActivityViewHeader" t-inherit="mail.ActivityViewHeader" t-inherit-mode="extension" owl="1">
+        <xpath expr="//thead/tr/th[1]" position="replace">
+            <t t-if="props.model == 'prm.lead' or props.model == 'pom.lead'">
+                <th class="o_activity_type_cell">
+                    <div>
+                        <span>Tên cơ hội</span>
+                    </div>
+                    <div class="mt24"/>
+                </th>
+            </t>
+            <t t-else="">
+                <th></th>
+            </t>
+        </xpath>
+    </t>
+</templates>

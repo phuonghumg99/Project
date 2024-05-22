@@ -1,0 +1,46 @@
+<odoo>
+    <!--    <record id="trm_stage_form" model="ir.ui.view">-->
+    <!--        <field name="name">trm.stage.form</field>-->
+    <!--        <field name="model">th.trm.stage</field>-->
+    <!--        <field name="priority" eval="1"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <form string="Stage">-->
+    <!--                <sheet>-->
+    <!--                    <div class="oe_title">-->
+    <!--                        <label for="name"/>-->
+    <!--                        <h1>-->
+    <!--                            <field name="name" placeholder="G0"/>-->
+    <!--                        </h1>-->
+    <!--                    </div>-->
+    <!--                    <group>-->
+    <!--                        <field name="th_last_status"/>-->
+    <!--                    </group>-->
+
+    <!--                    <separator string="Mô tả"/>-->
+    <!--                    <field name="th_description" nolabel="1"-->
+    <!--                           placeholder="Cung cấp cho nhóm của bạn các yêu cầu để chuyển cơ hội sang giai đoạn này."/>-->
+    <!--                </sheet>-->
+    <!--            </form>-->
+    <!--        </field>-->
+    <!--    </record>-->
+    <record id="th_trm_stage_view_tree" model="ir.ui.view">
+        <field name="name">th_trm_stage_view_tree</field>
+        <field name="model">th.trm.stage</field>
+        <field name="arch" type="xml">
+            <tree string="Stages" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="th_first_status"/>
+                <field name="th_last_status"/>
+                <field name="th_description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="th_trm_stage_view_act" model="ir.actions.act_window">
+        <field name="name">Giai đoạn</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">th.trm.stage</field>
+        <field name="view_mode">tree</field>
+    </record>
+</odoo>

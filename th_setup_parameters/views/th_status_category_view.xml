@@ -1,0 +1,21 @@
+<odoo>
+    <record id="th_call_status_category_view_tree" model="ir.ui.view">
+        <field name="name">th_call_status_category_view_tree</field>
+        <field name="model">th.status.category</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="sequence"  widget="handle"/>
+                <field name="name"/>
+                <field name="th_type" invisible="1"/>
+                <field name="th_description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="th_call_status_category_view_act" model="ir.actions.act_window">
+        <field name="name">Nhóm trạng thái</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">th.status.category</field>
+        <field name="view_mode">tree</field>
+    </record>
+</odoo>

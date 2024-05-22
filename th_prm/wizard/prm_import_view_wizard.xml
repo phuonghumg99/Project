@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="th_import_prm_view_form" model="ir.ui.view">
+            <field name="name">th_import_prm_view_form</field>
+            <field name="model">th.import.prm</field>
+            <field name="arch" type="xml">
+                <form string="Import PRM">
+                    <group>
+                        <field name="file" filename="file_name" string="Tệp tin Excel"/>
+                        <field name="file_name" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button string="Tải lên" type="object" name="action_import_data_prm" class="btn-primary"/>
+                        <button string="Huỷ" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="th_import_prm_action" model="ir.actions.act_window">
+            <field name="name">Import PRM</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">th.import.prm</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="prm_transform_stage_form" model="ir.ui.view">
+        <field name="name">prm_transform_stage_form</field>
+        <field name="model">prm.transform.stage</field>
+        <field name="arch" type="xml">
+            <form string="Chuyển mối quan hệ">
+                <group>
+                    <field name="th_stage_id" options='{"no_open": True, "no_create": True}' domain="[('th_type', '=', 'prm')]"/>
+                </group>
+                <footer>
+                    <button name="action_transform_stage" type="object" string="Chuyển" class="btn btn-primary"/>
+                    <button string="Hủy" special="cancel" class="btn btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="pom_transform_stage_form" model="ir.ui.view">
+        <field name="name">pom_transform_stage_form</field>
+        <field name="model">prm.transform.stage</field>
+        <field name="arch" type="xml">
+            <form string="Chuyển mối quan hệ">
+                <group>
+                    <field name="th_stage_id" options='{"no_open": True, "no_create": True}' domain="[('th_type', '=', 'pom')]"/>
+                </group>
+                <footer>
+                    <button name="action_transform_stage" type="object" string="Chuyển" class="btn btn-primary"/>
+                    <button string="Hủy" special="cancel" class="btn btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_prm_transform_stage_view" model="ir.actions.act_window">
+        <field name="name">Chuyển mối quan hệ</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">prm.transform.stage</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_prm_lead"/>
+        <field name="groups_id" eval="[(4, ref('group_prm_user'))]"/>
+        <field name="view_id" ref="prm_transform_stage_form"/>
+    </record>
+
+    <record id="action_pom_transform_stage_view" model="ir.actions.act_window">
+        <field name="name">Chuyển mối quan hệ</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">prm.transform.stage</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_pom_lead"/>
+        <field name="groups_id" eval="[(4, ref('group_prm_user'))]"/>
+        <field name="view_id" ref="pom_transform_stage_form"/>
+    </record>
+
+</odoo>

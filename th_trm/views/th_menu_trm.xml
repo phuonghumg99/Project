@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="th_trm_root" name="TRM" sequence="299" web_icon="th_trm,static/description/icon.png" groups="group_trm_user"/>
+            <menuitem id="th_trm_lead" name="Cơ hội sản xuất" parent="th_trm_root" action="th_trm_lead_view_act" sequence="1"/>
+            <menuitem id="th_lecturer_warehouse" name="Kho giảng viên" parent="th_trm_root" action="th_lecturer_profile_view_act" sequence="2" groups="group_trm_user"/>
+            <menuitem id="th_configuration_root" name="Cấu hình" parent="th_trm_root" sequence="3" groups="group_trm_admin"/>
+                <menuitem id="th_trm_stage_menu" name="Giai đoạn" action="th_trm_stage_view_act" parent="th_configuration_root" sequence="1"/>
+                <menuitem id="th_trm_calling_status_menu" name="Tình trạng gọi" action="th_status_category_view_trm_act" parent="th_configuration_root" sequence="2"/>
+                <menuitem id="th_trm_team_menu" name="Thành viên nhóm" action="th_trm_team_view_act" parent="th_configuration_root" sequence="3"/>
+                <menuitem id="menu_trm_source" name="Nguồn khách hàng" parent="th_configuration_root" action="action_trm_source_view" sequence="4"/>
+                <menuitem id="menu_trm_channel" name="Kênh thông tin" parent="th_configuration_root" action="th_trm_channel_view_act" sequence="6"/>
+            <menuitem id="trm_menu_import" name="Import TRM" parent="th_trm_root" sequence="99" action="th_import_trm_action" groups="base.group_no_one"/>
+    </data>
+</odoo>

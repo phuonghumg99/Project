@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="prm_assign_leads_form" model="ir.ui.view">
+        <field name="name">prm.assign.leads.form</field>
+        <field name="model">prm.assign.leads</field>
+        <field name="arch" type="xml">
+            <form string="Giao cơ hội">
+                <group>
+                    <field name="th_allowed_team_ids" invisible="1"/>
+                    <field name="th_allowed_user_ids" invisible="1"/>
+                    <field name="th_team_user" widget="radio" options="{'horizontal': true}"/>
+                    <field name="th_team_id"
+                           attrs="{'invisible': [('th_team_user', '=', 'individual')], 'required': [('th_team_user', '=', 'team')]}"
+                           options='{"no_open": True, "no_create": True}'/>
+                    <field name="th_user_id"
+                           attrs="{'invisible': [('th_team_user', '=', 'team')], 'required': [('th_team_user', '=', 'individual')]}"
+                           options='{"no_open": True, "no_create": True}'/>
+                </group>
+                <footer>
+                    <button name="action_assign_leads" type="object" string="Giao" class="btn btn-primary"/>
+                    <button string="Hủy" special="cancel" class="btn btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_prm_assign_leads_view" model="ir.actions.act_window">
+        <field name="name">Giao cơ hội</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">prm.assign.leads</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_prm_lead"/>
+        <field name="groups_id" eval="[(4, ref('group_prm_user'))]"/>
+    </record>
+
+    <record id="action_pom_assign_leads_view" model="ir.actions.act_window">
+        <field name="name">Giao cơ hội</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">prm.assign.leads</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_pom_lead"/>
+        <field name="groups_id" eval="[(4, ref('group_prm_user'))]"/>
+    </record>
+
+</odoo>

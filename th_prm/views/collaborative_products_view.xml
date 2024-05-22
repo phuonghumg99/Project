@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="prm_collaborative_products_view_form" model="ir.ui.view">
+        <field name="name">prm_collaborative_products_view_form</field>
+        <field name="model">prm.collaborative.products</field>
+        <field name="arch" type="xml">
+            <form string="Sản phẩm hợp tác">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="th_description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="prm_collaborative_products_view_tree" model="ir.ui.view">
+        <field name="name">prm_collaborative_products_view_tree</field>
+        <field name="model">prm.collaborative.products</field>
+        <field name="arch" type="xml">
+            <tree string="Sản phẩm hợp tác" editable="bottom">
+                <field name="name"/>
+                <field name="th_description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_prm_collaborative_products_view" model="ir.actions.act_window">
+        <field name="name">Sản phẩm hợp tác</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">prm.collaborative.products</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

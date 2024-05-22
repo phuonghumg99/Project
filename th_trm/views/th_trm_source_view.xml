@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="trm_source_view_tree" model="ir.ui.view">
+        <field name="name">trm_source_view_tree</field>
+        <field name="model">th.trm.source</field>
+        <field name="arch" type="xml">
+            <tree string="Nguồn khách hàng" editable="bottom">
+                <field name="name"/>
+                <field name="th_description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_trm_source_view" model="ir.actions.act_window">
+        <field name="name">Nguồn khách hàng</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">th.trm.source</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
