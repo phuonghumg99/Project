@@ -91,6 +91,7 @@ class POMLead(models.Model):
     th_ward_id = fields.Many2one("th.country.ward", string="Phường/Xã",
                                  domain="[('th_district_id', '=', th_district_id)]")
 
+
     @api.onchange('th_call_status')
     def onchange_th_call_status(self):
         if self.th_call_status_detail_id and self.th_call_status_detail_id.id not in self.th_call_status.th_status_detail_ids.ids:
